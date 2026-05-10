@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Feliz Dia das Mães</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;500&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+    font-family:Poppins, sans-serif;
+    text-align:center;
+    color:#6b2c5c;
+    background: linear-gradient(180deg,#ffd6ec,#f3d6ff,#ffffff);
+    overflow-x:hidden;
+}
+
+h1{
+    font-family:'Great Vibes',cursive;
+    font-size:3rem;
+    margin-top:30px;
+    animation: fade 2s ease-in-out;
+}
+h2{margin-bottom:20px;animation: fade 3s ease-in-out;}
+
+.container{padding:20px}
+
+button{
+    padding:12px 22px;
+    border:none;
+    border-radius:30px;
+    background:#ff6fb5;
+    color:white;
+    font-size:16px;
+    cursor:pointer;
+    margin:10px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.2);
+    transition:.3s;
+}
+button:hover{transform:scale(1.1);}
+
+.carta{
+    width:90%;
+    max-width:420px;
+    margin:20px auto;
+    background:white;
+    border-radius:20px;
+    padding:25px;
+    box-shadow:0 10px 30px rgba(0,0,0,.15);
+    display:none;
+    animation: abrirCarta 1.5s forwards;
+}
+
+footer{
+    margin:40px 0 20px;
+    font-size:14px;
+}
+
+@keyframes fade{
+    from{opacity:0; transform:translateY(20px)}
+    to{opacity:1; transform:translateY(0)}
+}
+
+@keyframes abrirCarta{
+    from{opacity:0; transform:scale(.7)}
+    to{opacity:1; transform:scale(1)}
+}
+
+/* corações */
+.coracao{
+    position:fixed;
+    bottom:-20px;
+    font-size:20px;
+    animation: subir 6s linear infinite;
+    opacity:.7;
+}
+@keyframes subir{
+    0%{transform:translateY(0)}
+    100%{transform:translateY(-110vh)}
+}
+
+/* confete */
+.confete{
+    position:fixed;
+    width:10px;
+    height:10px;
+    background:#ff6fb5;
+    top:-10px;
+    animation:cair 4s linear forwards;
+}
+@keyframes cair{
+    to{transform:translateY(100vh) rotate(720deg);}
+}
+
+.music{
+    position:fixed;
+    top:15px;
+    right:15px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="music">
+<button onclick="toggleMusic()">🎵 Música</button>
+</div>
+
+<div class="container">
+<h1>Feliz Dia das Mães 💖</h1>
+<h2>Uma cartinha especial para você, Rosanea</h2>
+
+<button onclick="abrirCarta()">Abrir carta 💌</button>
+
+<div class="carta" id="carta">
+<p>
+"Oi mãe,<br><br>
+Hoje é o seu dia, mas todos os dias deveriam ser seus. Obrigado por todo carinho, cuidado, paciência e amor que você me dá.<br><br>
+Você é a pessoa mais importante da minha vida e eu sou muito grato por ter você como minha mãe.<br><br>
+Que seu dia seja cheio de felicidade, abraços, sorrisos e muito amor.<br><br>
+Te amo muito! 💖<br><br>
+Com carinho,<br>
+seu filho Daniel"
+</p>
+</div>
+
+<button onclick="surpresa()">Clique para uma surpresa 🎁</button>
+
+<h2 id="msg"></h2>
+</div>
+
+<footer>Feito com amor por Daniel para Rosanea 💐</footer>
+
+<audio id="musica" loop>
+<source src="https://cdn.pixabay.com/audio/2022/03/15/audio_5b2c3f6f5c.mp3">
+</audio>
+
+<script>
+let musica=document.getElementById("musica");
+
+function toggleMusic(){
+    musica.paused ? musica.play() : musica.pause();
+}
+
+function abrirCarta(){
+    document.getElementById("carta").style.display="block";
+    criarCoracoes();
+}
+
+function criarCoracoes(){
+    setInterval(()=>{
+        let coracao=document.createElement("div");
+        coracao.className="coracao";
+        coracao.innerHTML="💖";
+        coracao.style.left=Math.random()*100+"vw";
+        coracao.style.fontSize=Math.random()*20+15+"px";
+        document.body.appendChild(coracao);
+        setTimeout(()=>coracao.remove(),6000);
+    },300);
+}
+
+function surpresa(){
+    document.getElementById("msg").innerHTML="Você é a melhor mãe do mundo! 🌸";
+    for(let i=0;i<120;i++){
+        let c=document.createElement("div");
+        c.className="confete";
+        c.style.left=Math.random()*100+"vw";
+        c.style.background=`hsl(${Math.random()*360},80%,70%)`;
+        document.body.appendChild(c);
+        setTimeout(()=>c.remove(),4000);
+    }
+}
+</script>
+
+</body>
+</html>
